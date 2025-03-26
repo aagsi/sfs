@@ -1,0 +1,30 @@
+#include "TExperimentConfiguration.h"
+
+#include "sfsLogger.h"
+#include "FairLogger.h"
+
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <set>
+
+TExperimentConfiguration* TExperimentConfiguration::instance = nullptr;
+uint64_t TExperimentConfiguration::exp_start_time = 1.5e19;
+uint64_t TExperimentConfiguration::exp_end_time = 1.5e19;
+Int_t TExperimentConfiguration::bos_trig = 12;
+Int_t TExperimentConfiguration::eos_trig = 13;
+
+
+
+
+TExperimentConfiguration::TExperimentConfiguration()
+{
+    if(exp_start_time == 1.5e19)
+    {
+        sfsLOG(warn, "Experiment start time not set.");
+    }
+    if(exp_end_time == 1.5e19)
+    {
+        sfsLOG(warn, "Experiment end time not set.");
+    }
+}

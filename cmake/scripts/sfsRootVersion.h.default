@@ -1,0 +1,10 @@
+//#ifndef R3BROOT_VERSION
+//#define R3BROOT_VERSION 0.0.9
+//#define R3BROOT_GIT_DATE "Sun Jan 1 00:00:00 0"
+//#endif
+
+#ifndef SFSROOT_VERSION
+#define SFSROOT_VERSION 0.0.9
+#define SFSROOT_GIT_DATE "Sun Jan 1 00:00:00 0"
+#endif
+
