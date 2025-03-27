@@ -21,7 +21,7 @@
 #include "FairRunOnline.h"
 #include "FairRuntimeDb.h"
 
-// c4
+// sfs
 #include "FrsGermaniumCorrelationsNearline.h"
 #include "EventHeader.h"
 #include "GermaniumFebexData.h"

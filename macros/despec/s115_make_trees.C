@@ -146,8 +146,7 @@ void s115_make_trees() {
     TString fExpName   = "s115";
     
     // Define Important Paths
-    //TString sfsRoot_path = "/u/despec/s115_online/sfsRoot";
-    TString sfsRoot_path = "/u/profi/aali/sfsRoot/sfsRoot";
+    TString sfsRoot_path = "/u/despec/s115_online/sfsRoot";
     TString ucesb_path = sfsRoot_path + "/unpack/exps/" + fExpName + "/" + fExpName +
                          " --debug --input-buffer=200Mi --event-sizes --allow-errors";
     ucesb_path.ReplaceAll("//", "/");
@@ -161,7 +160,7 @@ void s115_make_trees() {
     FairLogger::GetLogger()->SetColoredLog(true);
     
     // Data File and Output Configuration
-    TString filename = "ioFiles/68Br_setting23_6gBe_0085_0073_stitched.lmd";
+    TString filename = "68Br_setting23_6gBe_0085_0073_stitched.lmd";
     TString outputpath = "test_tree";
     TString outputFileName = outputpath + ".root";
     

@@ -4,7 +4,7 @@
 #include "FairRunAna.h"
 #include "FairRuntimeDb.h"
 
-// c4
+// sfs
 #include "EventHeader.h"
 #include "FimpNearlineSpectra.h"
 #include "AnalysisTools.h"

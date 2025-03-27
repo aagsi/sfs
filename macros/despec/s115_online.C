@@ -103,7 +103,7 @@ void InitializeConfig(Config &config) {
     config.expName = "s115";
     //config.sfsRootPath = "/u/despec/s115_online/c4Root";
     config.sfsRootPath = "/u/profi/aali/sfsRoot/sfsRoot";
-    config.filename = "68Br_setting23_6gBe_0085_0073_stitched.lmd";
+    config.filename = "../../../tmp/ioFiles/68Br_setting23_6gBe_0085_0073_stitched.lmd";
     config.outputFileName = "output.root";
     config.configPath = std::string(config.sfsRootPath.Data()) + "/config/" + std::string(config.expName.Data());
     config.ucesbPath = config.sfsRootPath + "/unpack/exps/" + config.expName + "/" +
