@@ -1,6 +1,6 @@
 /**
- * @file org4_s115_online.C
- * @brief Macro to set up and run the online analysis for the s115 experiment.
+ * @file superFRS_online.C
+ * @brief Macro to set up and run the online analysis for the superFRS experiment.
  *
  * This macro configures the data source, initializes detector readers, calibration tasks,
  * online spectra, correlations, and finally executes the run.
@@ -78,7 +78,7 @@ typedef struct EXT_STR_h101_t {
     EXT_STR_h101_frs_onion_t      frs;            ///< FRS subsystem data.
 } EXT_STR_h101;
 
-namespace s115Online {
+namespace superFRSOnline {
 
 /**
  * @brief Experiment configuration parameters.
@@ -192,7 +192,7 @@ void SetupCalibrationTasks(FairRunOnline* run) {
     }
 }
 
-} // namespace s115Online
+} // namespace superFRSOnline
 
 /**
  * @brief Initializes the data source for the online analysis.
@@ -268,12 +268,12 @@ void SetupDetectors(UcesbSource* source, EXT_STR_h101 &ucesb_struct,
  * detector readers, calibration tasks, online spectra, and correlation tasks. Finally,
  * it starts the run and reports performance statistics.
  */
-void s115_online() {
-    std::cout << "Running s115_online macro..." << std::endl;
+void superFRS_online() {
+    std::cout << "Running superFRS_online macro..." << std::endl;
     
     // Initialize experiment configuration.
-    s115Online::Config config;
-    s115Online::InitializeConfig(config);
+    superFRSOnline::Config config;
+    superFRSOnline::InitializeConfig(config);
 
     // ----- Timing and Logger Configuration -----
     TStopwatch timer;
@@ -321,16 +321,16 @@ void s115_online() {
     TCorrelationsConfiguration::SetCorrelationsFile(config.configPath + "/correlations.dat");
     
     // ----- Detector Configuration -----
-    s115Online::SetupDetectorConfiguration(config.configPath);
+    superFRSOnline::SetupDetectorConfiguration(config.configPath);
     
     // ----- Setup Detector Readers -----
     SetupDetectors(source, ucesb_struct, config.configPath.c_str());
     
     // ----- Setup Calibration and Online Tasks -----
-    s115Online::SetupCalibrationTasks(run);
+    superFRSOnline::SetupCalibrationTasks(run);
     
     // ----- Setup Correlations (FRS & Germanium) -----
-    s115Online::SetupCorrelations(run, config.configPath);
+    superFRSOnline::SetupCorrelations(run, config.configPath);
     
     // ----- Initialize and Run the Analysis -----
     run->Init();

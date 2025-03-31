@@ -32,39 +32,39 @@
 //#include "TSIParameter.h"
 //#include "TMRTOFMSParameter.h"
 //#include "TRangeParameter.h"
-#include "bPlastReader.h"
-#include "GermaniumReader.h"
+//#include "bPlastReader.h"
+//#include "GermaniumReader.h"
 #include "FrsReader.h"
-#include "AidaReader.h"
-#include "bPlastRaw2Cal.h"
-#include "GermaniumRaw2Cal.h"
+//#include "AidaReader.h"
+//#include "bPlastRaw2Cal.h"
+//#include "GermaniumRaw2Cal.h"
 #include "FrsRaw2Cal.h"
-#include "AidaUnpack2Cal.h"
-#include "AidaCal2Hit.h"        // Added header for AidaCal2Hit
+//#include "AidaUnpack2Cal.h"
+//#include "AidaCal2Hit.h"        // Added header for AidaCal2Hit
 #include "FrsCal2Hit.h"
 #include "UcesbSource.h"
 #include "UnpackReader.h"
 #include "ext_h101_unpack.h"
-#include "ext_h101_aida.h"
-#include "ext_h101_bplast.h"
-#include "ext_h101_germanium.h"
+//#include "ext_h101_aida.h"
+//#include "ext_h101_bplast.h"
+//#include "ext_h101_germanium.h"
 #include "ext_h101_frs.h"
 #include "FairRootFileSink.h"
 #include "FairRunOnline.h"
 #include <fairlogger/Logger.h>
 #include "TFrsConfiguration.h"
 #include "TCorrelationsConfiguration.h"
-#include "TAidaConfiguration.h"
-#include "TbPlastConfiguration.h"
-#include "TGermaniumConfiguration.h"
+//#include "TAidaConfiguration.h"
+//#include "TbPlastConfiguration.h"
+//#include "TGermaniumConfiguration.h"
 #include "EventHeader.h"
 
 // -----------------------------------------------------------------------------
 // Subsystem Configuration Flags (using const bool for type safety)
 // -----------------------------------------------------------------------------
-const bool kAidaEnabled        = true;
-const bool kBPlastEnabled      = true;
-const bool kGermaniumEnabled   = true;
+const bool kAidaEnabled        = false;
+const bool kBPlastEnabled      = false;
+const bool kGermaniumEnabled   = false;
 const bool kFrsEnabled         = true;
 const bool kTimeMachineEnabled = false;
 const bool kWhiteRabbitEnabled = false;
@@ -81,9 +81,9 @@ const bool kWhiteRabbitEnabled = false;
 #ifndef EXT_STR_H101_DEFINED
 typedef struct EXT_STR_h101_t {
     EXT_STR_h101_unpack_t         eventheaders;
-    EXT_STR_h101_aida_onion_t     aida;
-    EXT_STR_h101_bplast_onion_t   bplast;
-    EXT_STR_h101_germanium_onion_t germanium;
+   // EXT_STR_h101_aida_onion_t     aida;
+   // EXT_STR_h101_bplast_onion_t   bplast;
+   // EXT_STR_h101_germanium_onion_t germanium;
     EXT_STR_h101_frs_onion_t      frs;
 } EXT_STR_h101;
 #define EXT_STR_H101_DEFINED
@@ -133,12 +133,12 @@ void PrintRunInformation(const TString& filename, TStopwatch& timer);
 /**
  * @brief Main function to set up and run the s115 tree-making process.
  */
-void s115_make_trees();
+void superFRS_make_trees();
 
 // -----------------------------------------------------------------------------
 // Main Function Implementation
 // -----------------------------------------------------------------------------
-void s115_make_trees() {
+void superFRS_make_trees() {
     // Experiment and Run Configuration
     const Int_t nev    = -1;  // Process all events if negative.
     const Int_t fRunId = 1;
@@ -146,7 +146,7 @@ void s115_make_trees() {
     TString fExpName   = "s115";
     
     // Define Important Paths
-    TString sfsRoot_path = "/u/despec/s115_online/sfsRoot";
+    TString sfsRoot_path = "/u/profi/aali/sfsRoot/sfsRoot";
     TString ucesb_path = sfsRoot_path + "/unpack/exps/" + fExpName + "/" + fExpName +
                          " --debug --input-buffer=200Mi --event-sizes --allow-errors";
     ucesb_path.ReplaceAll("//", "/");
@@ -160,7 +160,9 @@ void s115_make_trees() {
     FairLogger::GetLogger()->SetColoredLog(true);
     
     // Data File and Output Configuration
-    TString filename = "68Br_setting23_6gBe_0085_0073_stitched.lmd";
+    //TString filename = "68Br_setting23_6gBe_0085_0073_stitched.lmd";
+    TString filename = "../../../tmp/ioFiles/68Br_setting23_6gBe_0085_0073_stitched.lmd";
+
     TString outputpath = "test_tree";
     TString outputFileName = outputpath + ".root";
     
@@ -230,15 +232,15 @@ void InitializeFRSParameters() {
 }
 
 void SetupDetectorConfigurations(const std::string& config_path) {
-    TAidaConfiguration::SetBasePath(config_path + "/AIDA");
-    TbPlastConfiguration::SetDetectorMapFile(config_path + "/bplast/bplast_mapping_220125.txt");
+    //TAidaConfiguration::SetBasePath(config_path + "/AIDA");
+    //TbPlastConfiguration::SetDetectorMapFile(config_path + "/bplast/bplast_mapping_220125.txt");
     TFrsConfiguration::SetConfigPath(config_path + "/frs/");
     TFrsConfiguration::SetCrateMapFile(config_path + "/frs/crate_map.txt");
     
-    TGermaniumConfiguration::SetDetectorConfigurationFile(config_path + "/germanium/ge_alloc_jan22.txt");
-    TGermaniumConfiguration::SetDetectorCoefficientFile(config_path + "/germanium/ge_cal_feb21_2025_new_cards.txt");
-    TGermaniumConfiguration::SetDetectorTimeshiftsFile(config_path + "/germanium/ge_timeshifts_2202.txt");
-    TGermaniumConfiguration::SetPromptFlashCut(config_path + "/germanium/promptflash_new.root");
+    //TGermaniumConfiguration::SetDetectorConfigurationFile(config_path + "/germanium/ge_alloc_jan22.txt");
+    //TGermaniumConfiguration::SetDetectorCoefficientFile(config_path + "/germanium/ge_cal_feb21_2025_new_cards.txt");
+    //TGermaniumConfiguration::SetDetectorTimeshiftsFile(config_path + "/germanium/ge_timeshifts_2202.txt");
+    //TGermaniumConfiguration::SetPromptFlashCut(config_path + "/germanium/promptflash_new.root");
 }
 
 void SetupDetectorReaders(UcesbSource* source, EXT_STR_h101& ucesb_struct,
@@ -247,27 +249,27 @@ void SetupDetectorReaders(UcesbSource* source, EXT_STR_h101& ucesb_struct,
                                                   offsetof(EXT_STR_h101, eventheaders));
     source->AddReader(unpackHeader);
     
-    if (kAidaEnabled) {
+    /*if (kAidaEnabled) {
         AidaReader* aidaReader = new AidaReader((EXT_STR_h101_aida_onion*)&ucesb_struct.aida,
                                                 offsetof(EXT_STR_h101, aida));
         aidaReader->SetOnline(false);
         source->AddReader(aidaReader);
-    }
+    }*/
     
-    if (kBPlastEnabled) {
+    /*if (kBPlastEnabled) {
         bPlastReader* bplastReader = new bPlastReader((EXT_STR_h101_bplast_onion*)&ucesb_struct.bplast,
                                                       offsetof(EXT_STR_h101, bplast));
         bplastReader->SetInputFileFineTimeHistos(config_path + "/bplast/fine_time_G302_21FEB.root");
         bplastReader->SetOnline(true);
         source->AddReader(bplastReader);
-    }
+    }*/
     
-    if (kGermaniumEnabled) {
+    /*if (kGermaniumEnabled) {
         GermaniumReader* germaniumReader = new GermaniumReader((EXT_STR_h101_germanium_onion*)&ucesb_struct.germanium,
                                                                offsetof(EXT_STR_h101, germanium));
         germaniumReader->SetOnline(true);
         source->AddReader(germaniumReader);
-    }
+    }*/
     
     if (kFrsEnabled) {
         FrsReader* frsReader = new FrsReader((EXT_STR_h101_frs_onion*)&ucesb_struct.frs,
@@ -278,23 +280,23 @@ void SetupDetectorReaders(UcesbSource* source, EXT_STR_h101& ucesb_struct,
 }
 
 void SetupCalibrationTasks(FairRunOnline* run) {
-    if (kAidaEnabled) {
+   /* if (kAidaEnabled) {
         AidaUnpack2Cal* aidaCal = new AidaUnpack2Cal();
         aidaCal->SetOnline(false);
         run->AddTask(aidaCal);
-    }
+    }*/
     
-    if (kBPlastEnabled) {
+   /* if (kBPlastEnabled) {
         bPlastRaw2Cal* bplastCal = new bPlastRaw2Cal();
         bplastCal->SetOnline(false);
         run->AddTask(bplastCal);
-    }
+    }*/
     
-    if (kGermaniumEnabled) {
+    /*if (kGermaniumEnabled) {
         GermaniumRaw2Cal* germaniumCal = new GermaniumRaw2Cal();
         germaniumCal->SetOnline(false);
         run->AddTask(germaniumCal);
-    }
+    }*/
     
     if (kFrsEnabled) {
         FrsRaw2Cal* frsCal = new FrsRaw2Cal();
@@ -304,11 +306,11 @@ void SetupCalibrationTasks(FairRunOnline* run) {
 }
 
 void SetupAnalysisTasks(FairRunOnline* run) {
-    if (kAidaEnabled) {
+    /*if (kAidaEnabled) {
         AidaCal2Hit* aidaHit = new AidaCal2Hit();
         aidaHit->SetOnline(false);
         run->AddTask(aidaHit);
-    }
+    }*/
     
     if (kFrsEnabled) {
         FrsCal2Hit* frsHit = new FrsCal2Hit();

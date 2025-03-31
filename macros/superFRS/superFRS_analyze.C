@@ -7,7 +7,7 @@
 
 #include "FrsHitData.h" // Ensure this header is correctly included
 
-void analyze_frs()
+void superFRS_analyze()
 {
     // Open the input ROOT file
     TFile* inFile = TFile::Open("test_tree.root");
@@ -62,7 +62,7 @@ void analyze_frs()
     }
 
     // Save the histograms to an output ROOT file
-    TFile* outFile = TFile::Open("frs_analysis.root", "RECREATE");
+    TFile* outFile = TFile::Open("superFRS_analysis.root", "RECREATE");
     hAoQ->Write();
     hZ->Write();
     hZvsAoQ->Write();

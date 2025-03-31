@@ -1,1 +1,1 @@
-add_subdirectory(despec)
+add_subdirectory(superFRS)
