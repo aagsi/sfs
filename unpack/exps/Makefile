@@ -17,25 +17,8 @@ include $(UCESB_BASE_DIR)/makefile_direxist.inc
 
 #########################################################
 
-EXPS=s452 \
-	beammonitor \
-	lisa \
-	s450 \
-	NovTest \
-	onlyFATIMA \
-	s100 \
-	s101 \
-	s115 \
-	s143 \
-	s181 \
-	bb7 \
-	fimp \
-	test \
-	jikken \
-	pareeksha \
-	shiyan \
-	onlyBGO \
-	febex
+EXPS=s115 \
+	test
 ALL_EXPS = $(EXPS)
 
 #########################################################

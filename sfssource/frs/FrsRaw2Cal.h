@@ -1,6 +1,8 @@
 #ifndef FrsRaw2Cal_H
 #define FrsRaw2Cal_H
 
+//#pragma once
+#include "FairTask.h"  
 
 #include "TFrsConfiguration.h"
 #include "TFRSParameter.h"

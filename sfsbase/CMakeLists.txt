@@ -7,12 +7,12 @@ set(INCLUDE_DIRECTORIES
 #put here all directories where header files are located
 ${SFSROOT_SOURCE_DIR}/sfsbase
 ${SFSROOT_SOURCE_DIR}/sfsdata
-${SFSROOT_SOURCE_DIR}/sfsdata/wrData
+#${SFSROOT_SOURCE_DIR}/sfsdata/wrData
 ${SFSROOT_SOURCE_DIR}/sfsdata/frsData
 ${SFSROOT_SOURCE_DIR}/sfsdata/germaniumData
-${SFSROOT_SOURCE_DIR}/sfsdata/aidaData
+#${SFSROOT_SOURCE_DIR}/sfsdata/aidaData
 ${SFSROOT_SOURCE_DIR}/sfsdata/bplastData
-${SFSROOT_SOURCE_DIR}/sfsdata/fatimaData
+#${SFSROOT_SOURCE_DIR}/sfsdata/fatimaData
 )
 
 include_directories( ${INCLUDE_DIRECTORIES})

@@ -9,6 +9,8 @@
  * @date 2025-03-17
  */
 
+
+
 #include "TInterpreter.h"
 #include "TROOT.h"
 #include "TSystem.h"
@@ -22,27 +24,27 @@
 
 // Include subsystem readers and tasks
 #include "TFRSParameter.h"
-#include "bPlastReader.h"
-#include "GermaniumReader.h"
+//#include "bPlastReader.h"
+//#include "GermaniumReader.h"
 #include "FrsReader.h"
-#include "bPlastRaw2Cal.h"
-#include "GermaniumRaw2Cal.h"
+//#include "bPlastRaw2Cal.h"
+//#include "GermaniumRaw2Cal.h"
 #include "FrsRaw2Cal.h"
 #include "FrsCal2Hit.h"
-#include "bPlastOnlineSpectra.h"
-#include "GermaniumOnlineSpectra.h"
+//#include "bPlastOnlineSpectra.h"
+//#include "GermaniumOnlineSpectra.h"
 #include "FrsOnlineSpectra.h"
 #include "FrsRawSpectra.h"
 #include "FrsCalSpectra.h"
-#include "/u/profi/aali/sfsRoot/sfsRoot/analysis/online/wr/WhiterabbitCorrelationOnline.h"
-#include "/u/profi/aali/sfsRoot/sfsRoot/analysis/correlations/FrsGermaniumCorrelations.h"
+//#include "/u/profi/aali/sfsRoot/sfsRoot/analysis/online/wr/WhiterabbitCorrelationOnline.h"
+//#include "/u/profi/aali/sfsRoot/sfsRoot/analysis/correlations/FrsGermaniumCorrelations.h"
 #include "FrsGate.h"
 #include "UcesbSource.h"
 #include "UnpackReader.h"
 #include "ext_h101_unpack.h"
 #include "ext_h101_frs.h"
-#include "ext_h101_bplast.h"
-#include "ext_h101_germanium.h"
+//#include "ext_h101_bplast.h"
+//#include "ext_h101_germanium.h"
 #include "FairRootFileSink.h"
 #include "FairRunOnline.h"
 #include <fairlogger/Logger.h>
@@ -50,8 +52,8 @@
 #include "EventHeader.h"
 #include "TFrsConfiguration.h"
 #include "TCorrelationsConfiguration.h"
-#include "TbPlastConfiguration.h"
-#include "TGermaniumConfiguration.h"
+//#include "TbPlastConfiguration.h"
+//#include "TGermaniumConfiguration.h"
 
 // Enable or disable subsystems (set to true to enable the subsystem)
 const bool kAidaEnabled         = false;
@@ -71,8 +73,8 @@ const bool kWhiteRabbitEnabled  = false;
 typedef struct EXT_STR_h101_t {
     EXT_STR_h101_unpack_t         eventheaders;   ///< Event header unpacked data.
     // EXT_STR_h101_aida_onion_t   aida;           ///< Aida data (disabled for this configuration).
-    EXT_STR_h101_bplast_onion_t   bplast;         ///< bPlast subsystem data.
-    EXT_STR_h101_germanium_onion_t germanium;     ///< Germanium subsystem data.
+    //EXT_STR_h101_bplast_onion_t   bplast;         ///< bPlast subsystem data.
+    //EXT_STR_h101_germanium_onion_t germanium;     ///< Germanium subsystem data.
     EXT_STR_h101_frs_onion_t      frs;            ///< FRS subsystem data.
 } EXT_STR_h101;
 
@@ -98,7 +100,7 @@ struct Config {
  * @param[out] config Reference to the Config structure to initialize.
  */
 void InitializeConfig(Config &config) {
-    config.nev = -1;
+    config.nev = 10000;//-1;
     config.runId = 1;
     config.expName = "s115";
     //config.sfsRootPath = "/u/despec/s115_online/c4Root";
@@ -122,7 +124,7 @@ void SetupCorrelations(FairRunOnline* run, const std::string &configPath) {
         FrsGate* Br71 = new FrsGate("71Br", configPath + "/frs/71Br_Mar3.root");
         FrsGate* Se69 = new FrsGate("69Se", configPath + "/frs/69Se_Mar2.root");
         FrsGate* Se70 = new FrsGate("70Se", configPath + "/frs/70Se_Mar3.root");
-
+/*
         FrsGermaniumCorrelations* ge71Br = new FrsGermaniumCorrelations(Br71);
         ge71Br->SetShortLifetimeCollectionWindow(3000);
         run->AddTask(ge71Br);
@@ -134,6 +136,7 @@ void SetupCorrelations(FairRunOnline* run, const std::string &configPath) {
         FrsGermaniumCorrelations* ge69Se = new FrsGermaniumCorrelations(Se69);
         ge69Se->SetShortLifetimeCollectionWindow(3000);
         run->AddTask(ge69Se);
+*/
     }
 }
 
@@ -143,13 +146,13 @@ void SetupCorrelations(FairRunOnline* run, const std::string &configPath) {
  * @param[in] configPath Configuration file path.
  */
 void SetupDetectorConfiguration(const std::string &configPath) {
-    TbPlastConfiguration::SetDetectorMapFile(configPath + "/bplast/bplast_mapping_220125.txt");
+    //TbPlastConfiguration::SetDetectorMapFile(configPath + "/bplast/bplast_mapping_220125.txt");
     TFrsConfiguration::SetConfigPath(configPath + "/frs/");
     TFrsConfiguration::SetCrateMapFile(configPath + "/frs/crate_map.txt");
-    TGermaniumConfiguration::SetDetectorConfigurationFile(configPath + "/germanium/ge_alloc_jan22.txt");
-    TGermaniumConfiguration::SetDetectorCoefficientFile(configPath + "/germanium/ge_cal_feb21_2025_new_cards.txt");
-    TGermaniumConfiguration::SetDetectorTimeshiftsFile(configPath + "/germanium/ge_timeshifts_2202.txt");
-    TGermaniumConfiguration::SetPromptFlashCut(configPath + "/germanium/promptflash_new.root");
+    //TGermaniumConfiguration::SetDetectorConfigurationFile(configPath + "/germanium/ge_alloc_jan22.txt");
+    //TGermaniumConfiguration::SetDetectorCoefficientFile(configPath + "/germanium/ge_cal_feb21_2025_new_cards.txt");
+    //TGermaniumConfiguration::SetDetectorTimeshiftsFile(configPath + "/germanium/ge_timeshifts_2202.txt");
+    //TGermaniumConfiguration::SetPromptFlashCut(configPath + "/germanium/promptflash_new.root");
 }
 
 /**
@@ -159,17 +162,17 @@ void SetupDetectorConfiguration(const std::string &configPath) {
  */
 void SetupCalibrationTasks(FairRunOnline* run) {
     // bPlast calibration task.
-    if (kBPlastEnabled) {
+    /*if (kBPlastEnabled) {
         bPlastRaw2Cal* calBplast = new bPlastRaw2Cal();
         calBplast->SetOnline(true);
         run->AddTask(calBplast);
-    }
+    }*/
     // Germanium calibration task.
-    if (kGermaniumEnabled) {
+    /*if (kGermaniumEnabled) {
         GermaniumRaw2Cal* calGermanium = new GermaniumRaw2Cal();
         calGermanium->SetOnline(true);
         run->AddTask(calGermanium);
-    }
+    }*/
     // FRS calibration and hit reconstruction tasks.
     if (kFrsEnabled) {
         FrsRaw2Cal* calFrs = new FrsRaw2Cal();
@@ -183,9 +186,9 @@ void SetupCalibrationTasks(FairRunOnline* run) {
         // Online spectra tasks for FRS.
         std::vector<FrsGate*> nogates;  // Empty vector; populate if necessary.
         FrsOnlineSpectra* onlineFrs = new FrsOnlineSpectra(nogates);
-        run->AddTask(onlineFrs);
-        run->AddTask(new FrsRawSpectra());
-        run->AddTask(new FrsCalSpectra());
+        run->AddTask(onlineFrs); // ok
+        run->AddTask(new FrsRawSpectra()); // ok
+        run->AddTask(new FrsCalSpectra()); // ok
     }
 }
 
@@ -230,23 +233,23 @@ void SetupDetectors(UcesbSource* source, EXT_STR_h101 &ucesb_struct,
     source->AddReader(unpackHeader);
 
     // bPlast detector reader.
-    if (kBPlastEnabled) {
+    /*if (kBPlastEnabled) {
         bPlastReader* reader = new bPlastReader(
             (EXT_STR_h101_bplast_onion*)&ucesb_struct.bplast, 
             offsetof(EXT_STR_h101, bplast));
         reader->SetInputFileFineTimeHistos(config_path + "/bplast/fine_time_G302_21FEB.root");
         reader->SetOnline(true);
         source->AddReader(reader);
-    }
+    }*/
     
     // Germanium detector reader.
-    if (kGermaniumEnabled) {
+    /*if (kGermaniumEnabled) {
         GermaniumReader* reader = new GermaniumReader(
             (EXT_STR_h101_germanium_onion*)&ucesb_struct.germanium, 
             offsetof(EXT_STR_h101, germanium));
         reader->SetOnline(true);
         source->AddReader(reader);
-    }
+    }*/
     
     // FRS detector reader.
     if (kFrsEnabled) {
@@ -287,6 +290,7 @@ void s115_online() {
     run->SetSink(new FairRootFileSink(config.outputFileName));
     run->ActivateHttpServer(1, 5000);
     
+
     // Create and register a folder for histograms.
     TFolder* histograms = new TFolder("Histograms", "Histograms");
     FairRootManager::Instance()->Register("Histograms", "Histogram Folder", histograms, false);
